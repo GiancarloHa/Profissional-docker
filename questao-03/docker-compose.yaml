@@ -1,0 +1,25 @@
+version: '3.3'
+
+networks:
+  post_net:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:12.12
+    networks:
+      - post_net
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+  pgadm:
+    image: dpage/pgadmin4:6.12
+    networks:
+      - post_net
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: admin
